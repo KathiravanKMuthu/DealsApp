@@ -1,0 +1,11 @@
+<ion-content padding>
+  <ion-card *ngIf="qrCode != ''">
+      <ion-card-content text-center>
+          <p class="title">{{dealName}}</p>
+      </ion-card-content>
+      <ngx-qrcode [qrc-value] = "qrCode" qrc-class = "aclass" qrc-errorCorrectionLevel = "L"></ngx-qrcode>
+  </ion-card>
+  <ion-buttons>
+      <button no-margin ion-button full round text-center class="customBtn" (click)="closeModal()">Close</button>
+  </ion-buttons>
+</ion-content>

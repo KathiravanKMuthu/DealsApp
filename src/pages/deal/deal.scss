@@ -1,0 +1,50 @@
+page-deal {
+
+    .customBtn {
+        background-color: rgb(241, 42, 42) !important;
+        color: rgb(245, 241, 241) !important;
+        padding: 5px;
+    }
+
+    .title {
+        font-size: 1.5rem !important;
+        white-space: pre-line;
+    }
+    .address {
+        font-size: 1rem !important;
+        text-align: left;
+        white-space: pre-line;
+        font-family: Roboto,monospace;
+    }
+    .details {
+        font-size: 1rem !important;
+        text-align: justify;
+        white-space: pre-line;
+        font-family: Roboto,monospace;
+    }
+
+    .strikethrough {
+        text-decoration: line-through;
+    }
+    
+    ion-content {
+        background-color: #fff;
+        padding:15px;
+      }
+
+      .radio-square {
+        border: 1px solid rgb(233, 6, 6) !important;
+        padding: 0.5em !important;
+        -webkit-appearance: none !important;
+      }
+      
+      .radio-square:checked {
+        background-color: red;
+        background-size: 9px 9px;
+      }
+      
+      .radio-square:focus {
+        outline-color: transparent;
+      }
+
+}

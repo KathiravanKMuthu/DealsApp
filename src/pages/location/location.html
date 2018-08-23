@@ -1,0 +1,38 @@
+<ion-header color="secondary">
+    <ion-navbar color="primary">
+      <ion-title>Select Location</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item>
+        <button ion-button icon-only float-end (click)="currentLocation()"><ion-icon name="ios-locate"></ion-icon></button>
+        <ion-searchbar autocorrect="off" autocapitalize="off" spellcheck="off" #searchbar placeholder="Search..." class="search-box"></ion-searchbar>        
+      </ion-item>
+  </ion-list>
+
+    <div #map id="map" class="map"></div>
+    <div class="centerMarker"></div>
+    <div class="address-view">
+      <ion-list>
+        <ion-item no-lines class="help-text">
+          Drag map to select Address
+        </ion-item>
+        <ion-item no-lines class="address-item">
+          <ion-label stacked class="title-label">ADDRESS</ion-label>
+          <ion-textarea class="address" [(ngModel)]="address"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+  <ion-footer>
+      <ion-row>
+          <ion-col>
+              <button no-margin ion-button full round text-center class="customBtn" (click)="navDealsListPage()">Use Current location</button>
+            </ion-col>
+          <ion-col>
+              <button no-margin ion-button full round text-center class="customBtn" (click)="navDealsListPage()">Use Searched location</button>
+            </ion-col>
+      </ion-row>
+  </ion-footer>

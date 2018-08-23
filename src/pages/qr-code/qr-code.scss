@@ -1,0 +1,19 @@
+page-qr-code {
+    .title {
+        font-size: 1.5rem !important;
+        white-space: pre-line;
+        text-align: center !important;
+        color: color($colors, primary) !important;
+    }
+    .customBtn {
+        background-color: rgb(241, 42, 42) !important;
+        color: rgb(245, 241, 241) !important;
+        padding: 5px;
+    }
+
+    ion-card-content {
+        margin: 1px !important;
+        text-align: center !important;
+        padding: 0 !important;
+    }
+}

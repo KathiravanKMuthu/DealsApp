@@ -1,0 +1,99 @@
+<ion-header color="secondary">
+  <ion-toolbar no-border-top>
+      <ion-row no-padding style="height:50px !important">
+        <ion-col col-4 no-padding >
+                <button ion-button round text-right class="customBtn" float-right>
+                    <ion-icon name="ios-search"></ion-icon>Search...
+                </button>
+        </ion-col>
+        <ion-col col-4 no-padding>
+                <button ion-button round text-left class="customBtn" float-right (click)="openLocationPage()">
+                  <ion-icon name="ios-locate-outline"></ion-icon>{{currentCity}}
+                </button>
+        </ion-col>
+        <ion-col col-4>
+            <button ion-button round no-margin class="customBtn" float-right>All Categories</button>
+        </ion-col>
+      </ion-row>
+  
+    <ion-segment [(ngModel)]="category" (ionChange)="onTabChanged(category)" >
+      <ion-segment-button value="NearMe">Near Me</ion-segment-button>
+      <ion-segment-button value="Deals">Deals</ion-segment-button>
+      <ion-segment-button value="ExpiredSoon">Expired Soon</ion-segment-button>
+      <ion-segment-button value="MyDeals">My Deals</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="category" swipeSegment class="swipe-area">
+    <ion-list no-lines *ngSwitchCase="'NearMe'">
+        <ion-item no-margin no-padding *ngFor="let merchant of merchants" style="background-color:rgb(99, 76, 76)">
+            <ion-card text-wrap tappable (click)="navMerchantPage(merchant)">
+              <ion-row>
+                <ion-col col-4 align-self-start>
+                  <img [src]="merchant.first_image" height="50px" width="100%">
+                </ion-col>
+                <ion-col col-8 align-self-start>
+                  <h2>{{merchant.business_name}}</h2>
+                  <h4>{{merchant.description.substr(0,50)}}</h4>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-item>
+    </ion-list>
+
+    <ion-list no-lines *ngSwitchCase="'Deals'">
+        <ion-item no-margin no-padding *ngFor="let deal of deals" style="background-color:rgb(99, 76, 76)">
+            <ion-card text-wrap tappable (click)="navDealPage(deal)">
+              <ion-row>
+                <ion-col col-10 align-self-start>
+                  <h2>{{deal.business_name}}</h2>
+                  <p class="primary">{{deal.redemption_count}}+ Redeemed</p>
+                </ion-col>
+                <ion-col col-2 align-self-start>
+                  <button ion-button color="primary" clear small icon-right (click)="like(deal)" align-self-end>
+                    <ion-icon name="ios-heart" isActive="true"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+              <img [src]="deal.first_image" height="200px" width="100%">
+              <div class="myOverlay">
+                  <div class="card-subtitle">{{((deal.actual_amount-deal.deal_amount) / deal.actual_amount) | percent}} off</div>
+               </div>
+              <ion-row>
+                <ion-col col-9 align-self-start>
+                  <h2>{{deal.title}}</h2>
+                </ion-col>
+                <ion-col col-3 align-self-end>
+                    <p class="secondary">{{deal.deal_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                    <p class="strikethrough">{{deal.actual_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                    <p style="color:black">{{deal.description.substr(0,50)}}...</p>
+                  </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                    <h4 class="primary">{{(deal.end_date| amFromUnix) | amLocal | amDifference: null :'days'}} days left</h4>
+                  </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-item>      
+    </ion-list>
+
+    <ion-list no-lines *ngSwitchCase="'ExpiredSoon'">
+      <ion-item>
+        Ice Age
+      </ion-item>
+      <ion-item>
+        Lion King
+      </ion-item>
+      <ion-item>
+        Up
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar color="primary">
+    <ion-title>{{merchant.business_name}}</ion-title>
+    <ion-buttons end>
+        <button class="white" ion-button clear (click)="share(merchant)"><ion-icon name="share"></ion-icon></button>
+    </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-list>
+    <ion-item no-padding no-margin>
+        <ion-slides autoplay="500" loop="true" speed="1000" pager="true" paginationType="bullets">
+            <ion-slide *ngFor="let image of images">
+              <img src="{{image}}" />
+            </ion-slide>
+          </ion-slides>        
+    </ion-item>
+    <ion-item no-padding no-margin>
+        <h2 class="title">{{merchant.business_name}}</h2>
+        <p class="details">{{merchant.description}}</p>
+        <p>OPENING HOURS</p>
+        <p class="details">{{merchant.operating_hours}}</p>
+    </ion-item>
+    <ion-item no-padding no-margin>
+        <button clear  text-center small (click)="openURL(merchant.website)"><ion-icon name="ios-globe" color="primary"></ion-icon></button>
+        <button clear  text-center small (click)="openURL(merchant.facebook)"><ion-icon name="logo-facebook" color="primary"></ion-icon></button>
+        <button clear  text-center small (click)="openURL(merchant.youtube)"><ion-icon name="logo-youtube" color="primary"></ion-icon></button>
+        <button clear  text-center small (click)="openURL(merchant.instagram)"><ion-icon name="logo-instagram" color="primary"></ion-icon></button>
+        <button clear item-right text-center small (click)="callMerchant()"><ion-icon name="md-call" color="primary"></ion-icon>{{merchant.phone_number}}</button>
+    </ion-item>
+    <ion-item no-padding no-margin>
+        <button item-left text-left small (click)="openMap()"><ion-icon name="ios-navigate" color="primary"></ion-icon>{{address}}, {{merchant.postal_code}}</button>
+    </ion-item>
+  </ion-list>
+  <div #map class="map" id="map"></div>
+</ion-content>

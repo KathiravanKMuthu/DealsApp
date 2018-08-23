@@ -1,0 +1,28 @@
+page-merchant {
+    .title {
+        font-size: 1.5rem !important;
+        white-space: pre-line;
+    }
+    .address {
+        font-size: 1rem !important;
+        text-align: left;
+        white-space: pre-line;
+        font-family: Roboto,monospace;
+    }
+    .details {
+        font-size: 1rem !important;
+        text-align: justify;
+        white-space: pre-line;
+        font-family: Roboto,monospace;
+  }
+
+  #map {
+    height: 40%;
+    width: 100%;
+  }
+
+  .swiper-pagination-bullet-active{
+    background: color($colors, primary) !important;
+  }
+  
+}
