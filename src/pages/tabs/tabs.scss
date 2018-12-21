@@ -1,3 +1,17 @@
 page-tabs {
 
+    .tabbar {
+        //background: theme-colors('mainColors', 'secondary') !important;
+        background-color: map-get($colors , secondary ) !important;
+    }
+    
+    .tab-button .tab-button-icon {
+          //color: theme-colors('textColors', 'accent') !important;
+          color: map-get($colors , primary ) !important;
+    }
+
+    .tabs-md[tabsHighlight="true"] .tab-highlight {
+        background-color: red;
+    }
+    
 }

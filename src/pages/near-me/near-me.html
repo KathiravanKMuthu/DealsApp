@@ -1,0 +1,18 @@
+<ion-list no-lines style="overflow-y: scroll !important">
+    <ion-item no-margin no-padding *ngIf="merchants?.length > 0">
+        <ion-card text-wrap tappable  *ngFor="let merchant of merchants" (click)="navMerchantPage(merchant)">
+          <ion-row>
+            <ion-col col-3 align-self-start>
+              <img src="{{image_dir}}{{merchant.image_dir}}" class="slide-image">
+            </ion-col>
+            <ion-col col-9 align-self-start>
+              <h2>{{merchant.business_name}}</h2>
+              <h4 *ngIf="merchant.description != null">{{merchant.description.substr(0,80)}}...</h4>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-item>
+      <ion-item no-margin no-padding *ngIf="merchants?.length == 0">
+        <p class="title" text-center style="font-weight: bolder;">No Record Found</p>
+      </ion-item>
+</ion-list>

@@ -1,14 +1,14 @@
 page-deal {
 
-    .customBtn {
-        background-color: rgb(241, 42, 42) !important;
-        color: rgb(245, 241, 241) !important;
-        padding: 5px;
-    }
-
     .title {
         font-size: 1.5rem !important;
         white-space: pre-line;
+        //color: color($colors, primary) !important;
+    }
+    .small_title {
+        font-size: 1.3rem !important;
+        white-space: pre-line;
+        color: color($colors, primary) !important;
     }
     .address {
         font-size: 1rem !important;
@@ -25,6 +25,7 @@ page-deal {
 
     .strikethrough {
         text-decoration: line-through;
+        font-size: 1.2rem !important;
     }
     
     ion-content {

@@ -1,4 +1,55 @@
-<register-layout-1
-  [data]="params.data"
-  [events]="params.events">
-</register-layout-1>
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Sign Up</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<!-- -->
+<ion-content class="auth-page">
+    <div class="login-content">
+            <!-- Logo >
+            <div padding-horizontal text-center class="animated fadeInDown">
+                <div class="logo"></div>
+            </div> -->
+      <!-- Signup form -->
+      <form [formGroup]="signUpForm" (submit) = "register()" novalidate>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="mail" item-start class="text-primary"></ion-icon>Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="ios-phone-portrait" item-start class="text-primary"></ion-icon>Phone Number</ion-label>
+            <ion-input type="text" formControlName="phone_number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="lock" item-start class="text-primary"></ion-icon>Password</ion-label>
+            <ion-input type="{{passwordType}}" formControlName="password"></ion-input>
+            <button ion-button clear item-end (click)='showPassword()' style="height:32px;">
+              <ion-icon name="{{passwordIcon}}" style="font-weight:bold;font-size:32px;"></ion-icon>
+            </button>  
+        </ion-item>
+      </form>
+
+      <div margin-top>
+        <button ion-button block color="dark" tappable (click)="register()">
+          SIGN UP
+        </button>
+        <br/>
+        <button no-margin ion-button full text-center class="btn-facebook" (click)="onFacebook()">
+          <ion-icon name="logo-facebook"></ion-icon>Sign Up with Facebook
+        </button> 
+        <br/>
+        <button no-margin ion-button full text-center class="btn-gplus">
+          <ion-icon name="logo-googleplus" (click)="onGoogle()"></ion-icon>Sign Up with Google
+        </button>
+      </div>
+  
+      <!-- Other links -->
+      <p text-center ion-text color="primary" tappable (click)="login()"><strong>Already have an account?</strong></p>
+    </div>
+  </ion-content>
+  

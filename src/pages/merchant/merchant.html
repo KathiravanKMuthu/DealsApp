@@ -12,15 +12,15 @@
     <ion-item no-padding no-margin>
         <ion-slides autoplay="500" loop="true" speed="1000" pager="true" paginationType="bullets">
             <ion-slide *ngFor="let image of images">
-              <img src="{{image}}" />
+              <img src="{{this.image_dir}}{{image}}" />
             </ion-slide>
           </ion-slides>        
     </ion-item>
     <ion-item no-padding no-margin>
         <h2 class="title">{{merchant.business_name}}</h2>
-        <p class="details">{{merchant.description}}</p>
+        <p class="details">{{merchant.description}}</p><br/>
         <p>OPENING HOURS</p>
-        <p class="details">{{merchant.operating_hours}}</p>
+        <p class="small_title">{{merchant.operating_time}}</p>
     </ion-item>
     <ion-item no-padding no-margin>
         <button clear  text-center small (click)="openURL(merchant.website)"><ion-icon name="ios-globe" color="primary"></ion-icon></button>
@@ -30,7 +30,8 @@
         <button clear item-right text-center small (click)="callMerchant()"><ion-icon name="md-call" color="primary"></ion-icon>{{merchant.phone_number}}</button>
     </ion-item>
     <ion-item no-padding no-margin>
-        <button item-left text-left small (click)="openMap()"><ion-icon name="ios-navigate" color="primary"></ion-icon>{{address}}, {{merchant.postal_code}}</button>
+        <button item-left text-left small (click)="openMap()"><ion-icon name="ios-navigate" color="primary"></ion-icon>{{address}}</button>
+        <button item-right text-center small class="customBtn" (click)="navDealsListPage(merchant.merchant_id)">View Deals</button>
     </ion-item>
   </ion-list>
   <div #map class="map" id="map"></div>

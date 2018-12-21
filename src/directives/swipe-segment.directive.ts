@@ -20,12 +20,15 @@ export class SwipeSegmentDirective implements OnInit {
     ngOnInit() {
         this.swipeGesture = new Gesture(this.el);
         this.swipeGesture.listen();
+        console.log("ngOnInit " + this.swipeGesture.isListening);
+
         this.swipeGesture.on('swipe', (event) => {
             this.swipeHandler(event);
         })
     }
 
     swipeHandler(event) {
+        console.log("SwipeSegmentDirective event " + event.direction);
         if (event.direction == '2') {
             // move forward
             const currentIndex = this.tabsList.indexOf(this.currentTab),

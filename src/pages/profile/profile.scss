@@ -1,3 +1,56 @@
 page-profile {
+    .home {
+        .fixed-content,
+        .scroll-content {
+            background-color:white !important;
+            ion-item {
+                margin: auto; 
+                background-color:rgb(99, 76, 76) !important;
+            }
+        }
+    }
 
+    ion-item { 
+        color: white !important;
+    }
+
+    .profile-item  {
+        text-align: center;
+        height: 300px;
+      }
+
+      .one{text-align: center;}
+      
+      .profile-picture {
+        border: 3px solid rgba(29, 15, 15, 0.25);
+        padding: 3px;
+        border-radius: 100%;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        margin: 0% auto;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        
+      }
+
+      .profile-picture img {
+      
+        object-fit: cover;
+        overflow: hidden;
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        image-orientation: from-image;
+      }
+
+      .profile-name {
+        text-align: center;
+      
+        height: 30%;
+        padding-top: 20px;
+      
+        text-transform: capitalize;
+      }      
 }

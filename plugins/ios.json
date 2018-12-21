@@ -1,0 +1,106 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com-badrit-base64": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "1789345494452836",
+      "APP_NAME": "DealDeal",
+      "ANDROID_SDK_VERSION": "4.+",
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-googlemaps": {
+      "API_KEY_FOR_IOS": "AIzaSyC-8VBQYTJAUMfPK401zUu2Awj12DU30sU",
+      "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
+      "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background.",
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-googleplus": {
+      "REVERSED_CLIENT_ID": "“com.googleusercontent.apps.947940788147-a9jv7hll8mvkboj61m245g3bv27blrl1”",
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-hockeyapp": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-nativegeocoder": {
+      "LOCATION_WHEN_IN_USE_DESCRIPTION": "Use geocoder service",
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "ionic-plugin-deeplinks": {
+      "URL_SCHEME": "dinjerdealsapp",
+      "DEEPLINK_SCHEME": "https",
+      "DEEPLINK_HOST": "dinjerdeals.com",
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "mx.ferreyra.callnumber": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+      "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes",
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-actionsheet": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "com.googlemaps.ios": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    }
+  }
+}

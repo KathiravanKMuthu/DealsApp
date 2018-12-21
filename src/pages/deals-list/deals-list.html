@@ -1,55 +1,96 @@
-<ion-header color="secondary">
-  <ion-toolbar no-border-top>
-      <ion-row no-padding style="height:50px !important">
-        <ion-col col-4 no-padding >
-                <button ion-button round text-right class="customBtn" float-right>
-                    <ion-icon name="ios-search"></ion-icon>Search...
-                </button>
-        </ion-col>
-        <ion-col col-4 no-padding>
-                <button ion-button round text-left class="customBtn" float-right (click)="openLocationPage()">
-                  <ion-icon name="ios-locate-outline"></ion-icon>{{currentCity}}
-                </button>
-        </ion-col>
-        <ion-col col-4>
-            <button ion-button round no-margin class="customBtn" float-right>All Categories</button>
-        </ion-col>
+<ion-header>
+  <ion-navbar no-border no-padding>
+      <ion-row>
+        <ion-item col-8 no-padding class="item-class">
+          <button ion-button round text-center class="customBtn" float-center><ion-icon name="ios-search"></ion-icon>Search...    </button>
+          <button ion-button round text-center class="customBtn" float-center (click)="openLocationPage()"><ion-icon name="ios-locate-outline"></ion-icon>{{currentCity}}    </button>
+        </ion-item>
+        <ion-item col-4 no-padding class="item-class" >
+          <button ion-button round full text-center class="customBtn" float-center (click)="navCategoryPage()">All Categories    </button>
+        </ion-item>
       </ion-row>
-  
-    <ion-segment [(ngModel)]="category" (ionChange)="onTabChanged(category)" >
-      <ion-segment-button value="NearMe">Near Me</ion-segment-button>
-      <ion-segment-button value="Deals">Deals</ion-segment-button>
-      <ion-segment-button value="ExpiredSoon">Expired Soon</ion-segment-button>
-      <ion-segment-button value="MyDeals">My Deals</ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+  </ion-navbar>
+  <ion-toolbar no-border no-padding color="primary">
+      <ion-segment [(ngModel)]="category" no-padding>
+        <ion-segment-button no-margin value="NearMe" (click)="setSegments(0)">Near Me</ion-segment-button>
+        <ion-segment-button no-margin value="Deals" (click)="setSegments(1)">Deals</ion-segment-button>
+        <ion-segment-button no-margin value="ExpiredSoon" (click)="setSegments(2)">Expired Soon</ion-segment-button>
+        <ion-segment-button no-margin value="MyDeals" (click)="setSegments(3)">My Deals</ion-segment-button>
+      </ion-segment>
+</ion-toolbar>
 </ion-header>
-
-<ion-content>
-  <div [ngSwitch]="category" swipeSegment class="swipe-area">
-    <ion-list no-lines *ngSwitchCase="'NearMe'">
-        <ion-item no-margin no-padding *ngFor="let merchant of merchants" style="background-color:rgb(99, 76, 76)">
-            <ion-card text-wrap tappable (click)="navMerchantPage(merchant)">
+<ion-content class="vertical-center">
+    <div [ngSwitch]="category" swipeSegment (tabChanged)="onTabChanged($event)" [tabsList]="categories" [(currentTab)]="category" class="swipe-area">    
+      <ion-list no-lines *ngSwitchCase="'NearMe'">
+        <ion-item no-margin no-padding *ngIf="merchants?.length > 0">
+            <ion-card text-wrap tappable  *ngFor="let merchant of merchants" (click)="navMerchantPage(merchant)">
               <ion-row>
                 <ion-col col-4 align-self-start>
-                  <img [src]="merchant.first_image" height="50px" width="100%">
+                  <img src="{{image_dir}}{{merchant.image_dir}}" height="50px" width="100%">
                 </ion-col>
                 <ion-col col-8 align-self-start>
                   <h2>{{merchant.business_name}}</h2>
-                  <h4>{{merchant.description.substr(0,50)}}</h4>
+                  <h4 *ngIf="merchant.description != null">{{merchant.description.substr(0,50)}}</h4>
                 </ion-col>
               </ion-row>
             </ion-card>
           </ion-item>
+          <ion-item no-margin no-padding *ngIf="merchants?.length == 0">
+            <p class="title" text-center style="font-weight: bolder;">No Record Found</p>
+          </ion-item>
     </ion-list>
 
     <ion-list no-lines *ngSwitchCase="'Deals'">
-        <ion-item no-margin no-padding *ngFor="let deal of deals" style="background-color:rgb(99, 76, 76)">
-            <ion-card text-wrap tappable (click)="navDealPage(deal)">
+        <ion-item no-margin no-padding *ngIf="deals?.length > 0">
+            <ion-card text-wrap tappable *ngFor="let deal of deals">
               <ion-row>
                 <ion-col col-10 align-self-start>
                   <h2>{{deal.business_name}}</h2>
-                  <p class="primary">{{deal.redemption_count}}+ Redeemed</p>
+                  <p class="title">{{deal.redemption_count}}+ Redeemed</p>
+                </ion-col>
+                <ion-col col-2 align-self-start>          
+                  <!--button ion-button color="primary" clear small icon-right *ngIf="!isFavorite(deal.deal_id)" (click)="favorite(deal)" align-self-end><ion-icon name="ios-heart-outline"></ion-icon></button>
+                  <button ion-button color="primary" clear small icon-right *ngIf="isFavorite(deal.deal_id)" (click)="unFavorite(deal)" align-self-end><ion-icon name="ios-heart"></ion-icon></button-->
+                </ion-col>
+              </ion-row>
+              <ion-row (click)="navDealPage(deal)">
+              <img src="{{image_dir}}{{deal.image_dir}}" height="200px" width="100%">
+              <div class="myOverlay" align="right" *ngIf="deal.actual_amount > 0">{{((deal.actual_amount-deal.deal_amount) / deal.actual_amount) | percent}} off</div>
+              <div class="myOverlay" align="right" *ngIf="(deal.actual_amount <= 0) && (deal.percentage > 0)">{{deal.percentage}}% off</div>
+              </ion-row>
+              <ion-row (click)="navDealPage(deal)">
+                <ion-col col-9 align-self-start>
+                  <h2>{{deal.title}}</h2>
+                </ion-col>
+                <ion-col col-3 align-self-end>
+                    <p class="title" *ngIf="deal.deal_amount > 0">{{deal.deal_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                    <p class="strikethrough" *ngIf="deal.actual_amount > 0">{{deal.actual_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row (click)="navDealPage(deal)">
+                  <ion-col>
+                    <p style="color:black" *ngIf="deal.description != null">{{deal.description.substr(0,50)}}...</p>
+                  </ion-col>
+              </ion-row>
+              <ion-row (click)="navDealPage(deal)">
+                  <ion-col>
+                    <h4 class="title">{{getDateDiff(deal.end_date)}}</h4>
+                  </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-item>
+          <ion-item no-margin no-padding *ngIf="deals?.length == 0">
+              <p class="title" text-center style="font-weight: bolder;">No Record Found</p>
+          </ion-item>
+    </ion-list>
+
+    <ion-list no-lines *ngSwitchCase="'ExpiredSoon'">
+        <ion-item no-margin no-padding  *ngIf="expdeals?.length > 0">
+            <ion-card text-wrap tappable *ngFor="let deal of expdeals"  (click)="navDealPage(deal)">
+              <ion-row>
+                <ion-col col-10 align-self-start>
+                  <h2>{{deal.business_name}}</h2>
+                  <p class="title">{{deal.redemption_count}}+ Redeemed</p>
                 </ion-col>
                 <ion-col col-2 align-self-start>
                   <button ion-button color="primary" clear small icon-right (click)="like(deal)" align-self-end>
@@ -57,43 +98,59 @@
                   </button>
                 </ion-col>
               </ion-row>
-              <img [src]="deal.first_image" height="200px" width="100%">
-              <div class="myOverlay">
-                  <div class="card-subtitle">{{((deal.actual_amount-deal.deal_amount) / deal.actual_amount) | percent}} off</div>
-               </div>
+              <ion-row>
+              <img src="{{image_dir}}{{deal.image_dir}}" height="200px" width="100%">
+              <div class="myOverlay" align="right" *ngIf="deal.actual_amount > 0">{{((deal.actual_amount-deal.deal_amount) / deal.actual_amount) | percent}} off</div>
+              <div class="myOverlay" align="right" *ngIf="(deal.actual_amount <= 0) && (deal.percentage > 0)">{{deal.percentage}}% off</div>
+              </ion-row>
               <ion-row>
                 <ion-col col-9 align-self-start>
                   <h2>{{deal.title}}</h2>
                 </ion-col>
                 <ion-col col-3 align-self-end>
-                    <p class="secondary">{{deal.deal_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
-                    <p class="strikethrough">{{deal.actual_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                    <p class="title" *ngIf="deal.deal_amount > 0">{{deal.deal_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                    <p class="strikethrough" *ngIf="deal.actual_amount > 0">{{deal.actual_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
                 </ion-col>
               </ion-row>
               <ion-row>
                   <ion-col>
-                    <p style="color:black">{{deal.description.substr(0,50)}}...</p>
+                    <p style="color:black" *ngIf="deal.description != null">{{deal.description.substr(0,50)}}...</p>
                   </ion-col>
               </ion-row>
               <ion-row>
                   <ion-col>
-                    <h4 class="primary">{{(deal.end_date| amFromUnix) | amLocal | amDifference: null :'days'}} days left</h4>
+                    <h4 class="title">{{getDateDiff(deal.end_date)}}</h4>
                   </ion-col>
               </ion-row>
             </ion-card>
-          </ion-item>      
+        </ion-item>
+        <ion-item no-margin no-padding *ngIf="expdeals?.length == 0">
+            <p class="title" text-center style="font-weight: bolder;">No Record Found</p>
+        </ion-item>
     </ion-list>
 
-    <ion-list no-lines *ngSwitchCase="'ExpiredSoon'">
-      <ion-item>
-        Ice Age
-      </ion-item>
-      <ion-item>
-        Lion King
-      </ion-item>
-      <ion-item>
-        Up
-      </ion-item>
+    <ion-list no-lines *ngSwitchCase="'MyDeals'">
+        <ion-item no-margin no-padding  *ngIf="mydeals?.length > 0">
+            <ion-card text-wrap *ngFor="let deal of mydeals" tappable>
+              <ion-row>
+                <ion-col col-3 align-self-start (click)="navDealPage(deal, true)">
+                  <img src="{{image_dir}}{{deal.image_dir}}" height="80px" width="100%">
+                  <div class="dealOverlay">Accepted</div>
+                </ion-col>
+                <ion-col col-6 align-self-start (click)="navDealPage(deal, true)">
+                  <p>{{deal.title}}</p><br/>
+                  <p class="small_title" *ngIf="deal.deal_amount > 0">{{((deal.actual_amount-deal.deal_amount) / deal.actual_amount) | percent}} off &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Valid for {{getDateDiff(deal.end_date, true)}}</p>
+                  <p class="small_title" *ngIf="deal.deal_amount <= 0">{{deal.percentage}}% off &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Valid for {{getDateDiff(deal.end_date, true)}}</p>
+                </ion-col>
+                <ion-col (click)="openQrModal(deal.title, deal.qrcode_string)">
+                  <ngx-qrcode qrc-element-type="url" [qrc-value]="deal.qrcode_string"></ngx-qrcode>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-item>
+          <ion-item no-margin no-padding *ngIf="mydeals?.length == 0">
+              <p class="title" text-center style="font-weight: bolder;">No Record Found</p>
+          </ion-item>
     </ion-list>
   </div>
 </ion-content>

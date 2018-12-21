@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { AuthService } from '../../providers/auth-service';
 
 @IonicPage()
 @Component({
@@ -8,34 +8,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tabs.html',
 })
 export class TabsPage {
-  params: any = {};
-  userDetails : any;
-  responseData: any;
+  data: any = [];
 
-  userPostData = {"user_id":"","token":""};
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    const data = JSON.parse(localStorage.getItem('userData'));
-    if(data != null)
-    {
-      this.userDetails = data.userData;
-      this.userPostData.user_id = this.userDetails.user_id;
-      this.userPostData.token = this.userDetails.token;
-    }
-
-    this.params.data = [
-      { page: "DealsListPage", icon: "ios-home" },
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService) {
+    
+    this.data = [
+      { page: "SliderPage", icon: "ios-home" },
       { page: "ClaimsListPage", icon: "ios-star" },
       { page: "NotificationsPage", icon: "ios-notifications" },
-      { page: "LocationPage", icon: "ios-heart" },
-      { page: "LoginPage", icon: "ios-person" }
+      { page: "WishListPage", icon: "ios-heart" }
     ];
 
-    this.params.events = {
-      'onItemClick': function (item: any) {
-            console.log("onItemClick");
-      }
-  };
+    authService.getAuthToken().then((data) => {
+        if(data && data != "") {
+          this.data.push({ page: "ProfilePage", icon: "ios-person" });
+        } else {
+          this.data.push({ page: "LoginPage", icon: "ios-person" });
+        }
+    });
   }
 
+  ionViewWillEnter() {
+    
+  }
 }

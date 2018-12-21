@@ -3,12 +3,8 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
+import { environment as ENV } from '../../environments/environment';
 
-/*
-  Generated class for the MapProvider provider.
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class MapProvider {
 
@@ -18,15 +14,19 @@ export class MapProvider {
   contentHeader: Headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(public http: Http, public geolocation: Geolocation, public storage: Storage ) {
-    this.google_api_key = 'AIzaSyC-8VBQYTJAUMfPK401zUu2Awj12DU30sU';
+    this.google_api_key = ENV.GOOGLE_MAP_API_KEY;
   }
 
-  getAddress(params) {
+ /* getAddress(params) {
     let url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + params.lat + ',' + params.long;
     return this.GET(url);
-  }
+  }*/
 
   getStreetAddress(params) {
+    if(!params || !params.lat) {
+        params.lat = 51.508530;
+        params.long = -0.076132;
+    }
     let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' + this.google_api_key + '&latlng=' + params.lat + ',' + params.long + '&result_type=street_address';
     return this.GET(url);
   }
@@ -49,18 +49,23 @@ export class MapProvider {
     // return this.http.delete(url, options).map(res => res.json());
   }
 
-  currentLocation(): boolean {
-    this.geolocation.getCurrentPosition().then((position) => {
-      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      let latLngObj = {'lat': position.coords.latitude, 'long': position.coords.longitude};
-      this.storage.set('current_latlong', JSON.stringify(latLngObj));
-      this.getAddressByLocation(latLngObj);
-      return true;
-    }, (err) => {
-      console.log(" Error getting currentlocation " + err);
-      return false;
+  currentLocation()  {
+    var positionOptions = {timeout: 10000, enableHighAccuracy: true};
+    return new Promise(resolve => {
+        this.geolocation.getCurrentPosition(positionOptions).then((position) => {
+          let latLngObj = {'lat': 51.508530, 'long': -0.076132};
+          if(position && position.coords) {
+              //let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+              latLngObj = {'lat': position.coords.latitude, 'long': position.coords.longitude};
+          }
+          this.storage.set('current_latlong', latLngObj);
+          this.getAddressByLocation(latLngObj);
+          resolve(true);
+        }, (err) => {
+          console.log(" Error getting currentlocation " + JSON.stringify(err));
+          resolve(false);
+        });
     });
-    return true;
   }
 
   getAddressByLocation(latLngObj) {
@@ -68,12 +73,7 @@ export class MapProvider {
     this.getStreetAddress(latLngObj).subscribe(
       s_address => {
         if (s_address.status == "ZERO_RESULTS") {
-          this.getAddress(latLngObj).subscribe(
-            address => {
-              this.getAddressComponentByPlace(address.results[0], latLngObj);
-            },
-            err => console.log("Error in getting the street address " + err)
-          )
+            err => console.log("Error in getting the street address " + err);
         } else {
           this.getAddressComponentByPlace(s_address.results[0], latLngObj);
         }
@@ -82,7 +82,6 @@ export class MapProvider {
         console.log('No Address found ' + err);
       });
   }
-
   
   getAddressComponentByPlace(place: any, latLngObj: any) {
     var components;
@@ -96,15 +95,6 @@ export class MapProvider {
       let ac = place.address_components[i];
       components[ac.types[0]] = ac.long_name;
     }
-
-    /*let addressObj = {
-      street: (components.street_number) ? components.street_number : 'not found',
-      area: components.route,
-      city: (components.sublocality_level_1) ? components.sublocality_level_1 : components.locality,
-      country: (components.administrative_area_level_1) ? components.administrative_area_level_1 : components.political,
-      postCode: components.postal_code,
-      loc: [latLngObj.long, latLngObj.lat],
-    }*/
     this.storage.set('current_city', (components.sublocality_level_1) ? components.sublocality_level_1 : components.locality);
     return components;
   }

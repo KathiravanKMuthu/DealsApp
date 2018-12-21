@@ -1,0 +1,44 @@
+<ion-list no-lines style="overflow-y: scroll !important">
+    <ion-item no-margin no-padding  *ngIf="expdeals?.length > 0">
+        <ion-card text-wrap tappable *ngFor="let deal of expdeals"  (click)="navDealPage(deal)">
+          <ion-row>
+            <ion-col col-10 align-self-start>
+              <h2>{{deal.business_name}}</h2>
+              <p class="title">{{deal.redemption_count}}+ Redeemed</p>
+            </ion-col>
+            <ion-col col-2 align-self-start>
+              <button ion-button color="primary" clear small icon-right (click)="like(deal)" align-self-end>
+                <ion-icon name="ios-heart" isActive="true"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+          <img src="{{image_dir}}{{deal.image_dir}}" class="slide-image">
+          <div class="myOverlay" align="right" *ngIf="deal.actual_amount > 0">{{((deal.actual_amount-deal.deal_amount) / deal.actual_amount) | percent}} off</div>
+          <div class="myOverlay" align="right" *ngIf="(deal.actual_amount <= 0) && (deal.percentage > 0)">{{deal.percentage}}% off</div>
+          </ion-row>
+          <ion-row>
+            <ion-col col-9 align-self-start>
+              <h2>{{deal.title}}</h2>
+            </ion-col>
+            <ion-col col-3 align-self-end>
+                <p class="title" *ngIf="deal.deal_amount > 0">{{deal.deal_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                <p class="strikethrough" *ngIf="deal.actual_amount > 0">{{deal.actual_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                <p style="color:black" *ngIf="deal.description != null">{{deal.description.substr(0,50)}}...</p>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                <h4 class="title">{{getDateDiff(deal.end_date)}}</h4>
+              </ion-col>
+          </ion-row>
+        </ion-card>
+    </ion-item>
+    <ion-item no-margin no-padding *ngIf="expdeals?.length == 0">
+        <p class="title" text-center style="font-weight: bolder;">No Record Found</p>
+    </ion-item>
+</ion-list>

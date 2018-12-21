@@ -1,0 +1,16 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+import { MyDealsPage } from './my-deals';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+
+@NgModule({
+  declarations: [
+    MyDealsPage,
+  ],
+  imports: [
+    IonicPageModule.forChild(MyDealsPage),
+    NgxQRCodeModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class MyDealsPageModule {}

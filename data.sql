@@ -1,0 +1,47 @@
+insert into merchant_info(merchant_email, business_name, phone_number, address1, address2, state, country, postal_code, website, operating_time, description, map_position) values ('maruthiexpress@gmail.com', 'MARUTHI EXPRESS', '442084230580', '248A Northolt Road','', 'Harrow', 'United Kingdom', 'HA2 8DU', 'www.maruthiexpress.com', 'Monday - Sunday: 8:00am - 11:00pm', 'We are a traditional Indian and Sri Lankan restaurant making food taste exactly as you would expect it. Our team of local Indian chefs make food that you will love each and every time! We also offer a takeaway service so you can enjoy your favourite food in the comfort of your own home.', '{ latitude: 51.5644916, longitude: -0.3563085 }');
+
+insert into merchant_info(merchant_email, business_name, phone_number, address1, address2, state, country, postal_code, website, operating_time, description, map_position) values ('yaalexpress@gmail.com', 'YAAL EXPRESS', '4420 8868 3861', '426B Rayners Lane','', 'Harrow', 'United Kingdom', 'HA5 5DX', 'www.yaalexpress.com', 'Monday - Sunday: 8:00am - 11:00pm', 'Yaal Express recently opened its doors in Rayners Lane to serve our clientele fresh and authentic Sri-Lankan & South Indian cuisine. Our ethos is simple: Bringing Sri-Lankan & South Indian street food to the UK. We have a range of experience from fine dining to street food and have fused our wealth, knowledge and expertise to form Yaal Express. We cater for small or large catering events and corporate orders are also welcome as we have a specific members area for our local offices. Order online with our easy to use online ordering app or we look forward to seeing you at the restaurant!.', '{ latitude: 51.5773912, longitude: -0.3734332 }');
+
+insert into merchant_info(merchant_email, business_name, phone_number, address1, address2, state, country, postal_code, website, operating_time, description, map_position) values ('varshibeautycare@gmail.com', 'VARSHI BEAUTY CARE', '447880965404', '','', 'London', 'United Kingdom', '', 'www.varshibeautycare.com', 'Monday - Sunday: 00:00am - 11:59pm', 'We make you look fabulous on your special day” We do bridal makeup service and make up service for all occasions. Our friendly, professionally trained make up artist come to your home or party hall and put your make up on for you.', '{ latitude: 51.59557, longitude: -0.2440267 }');
+
+
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (0, 1, 'Fresh traditional Indian and Sri Lankan food', 'At Maruthi Express, our selection of fresh Indian and Sri Lankan is made by traditional Indian chefs and taste as if it were made back home. We provide both an eat in and takeaway service, giving you the freedom to eat from the comfort of your own home.', '', 3.50, 'GBP', 0, '2018-08-01 00:00:00', '2018-09-30 23:59:59', true, 0);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (1, 1, 'Freshly steamed Idli and Chutney for only £2.50!', 'Freshly steamed Idli and Chutney for only £2.50!', '', 2.50, 'GBP', 0, '2018-08-01 00:00:00', '2018-09-30 23:59:59', true, 0);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (1, 1, 'Rice and any of our five curries for only £3.50!', 'Rice and any of our five curries for only £3.50!', '', 3.50, 'GBP', 0, '2018-08-01 00:00:00', '2018-09-30 23:59:59', true, 1);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (1, 1, 'Any Biryani only £3.50!', 'Any Biryani only £3.50!', '', 3.50, 'GBP', 0, '2018-08-01 00:00:00', '2018-09-30 23:59:59', true, 3);
+
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (0, 2, 'Delicious Weekday Deals!', 'Yaal’s weekday deals offering some of your favourite dishes valid Monday to Friday from 11am - 7pm! We also provide freshly prepared vegetarian and non-vegetarian meals for parties, providing your guest with amazing, authentic Sri Lankan and South Indian experience.', '', 5.00, 'GBP', 0, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 0);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (5, 2, 'Large Party Deal, Discount when you order over 100 Vegetarian meals!', 'Large Party Deal, Discount when you order over 100 Vegetarian meals!', '', 5.00, 'GBP', 4.00, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 1);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (5, 2, 'Orders over £50, free 1kg mixer packet !', 'Orders over £50, free 1kg mixer packet !', '', 50.00, 'GBP', 0, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 1);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (5, 2, '100 String Hopper Deal, Monday to Thursday only', '100 String Hopper Deal, Monday to Thursday only', '', 12.55, 'GBP', 10.15, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 12);
+
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (0, 3, 'Makeup & Hair Styling for all occasions', 'Look your best when we do your makeover for all kinds of events and parties. We will make you stand out from the crowd!', '', 500.00, 'GBP', 0, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 0);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (9, 3, 'Tamil Wedding full day package', 'Tamil Wedding full day package', '', 1200.00, 'GBP', 800.00, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 23);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (9, 3, '24 carat gold facial', '24 carat gold facial', '', 50.00, 'GBP', 40.00, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 5);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, deal_amount, currency, actual_amount, start_date, end_date, is_active, redemption_count) values (9, 3, 'Saree Ceremony full day package', 'Saree Ceremony full day package', '', 700.00, 'GBP', 500.00, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 7);
+
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, percentage, start_date, end_date, is_active, redemption_count) values (0, 3, 'Cake making and styling for all occasions', 'As well as styling, we also do cakes for all occasions! Give us a call or check out what kinds of cakes we can make!', '', 0, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 0);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, percentage, start_date, end_date, is_active, redemption_count) values (13, 3, '30% off Baby Shower cakes!', '30% off Baby Shower cakes!', '', 30, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 0);
+insert into deal_info (parent_deal_id, merchant_id, deal_heading, description, notes, percentage, start_date, end_date, is_active, redemption_count) values (13, 3, '25% off Birthday cakes!', '25% off Birthday cakes!', '', 25, '2018-08-23 00:00:00', '2018-09-10 14:59:59', true, 0);
+
+insert into category (category_name, seq_no) values ('BEAUTY & SPA', 0);
+insert into category (category_name, seq_no) values ('CAKES', 1);
+insert into category (category_name, seq_no) values ('ESTATE AGENTS', 2);
+insert into category (category_name, seq_no) values ('FASHION & CLOTHING', 3);
+insert into category (category_name, seq_no) values ('HEALTHCARE', 4);
+insert into category (category_name, seq_no) values ('JEWELLERY', 5);
+insert into category (category_name, seq_no) values ('OFF LICENCE', 6);
+insert into category (category_name, seq_no) values ('PARCELS & DELIVERY', 7);
+insert into category (category_name, seq_no) values ('PARTIES & SERVICES', 8);
+insert into category (category_name, seq_no) values ('PUBS & LEISURE', 9);
+insert into category (category_name, seq_no) values ('RESTAURANTS', 10);
+insert into category (category_name, seq_no) values ('TECHNOLOGY & PRINTING', 11);
+insert into category (category_name, seq_no) values ('TRANSPORTATION', 12);
+insert into category (category_name, seq_no) values ('OTHERS', 13);
+
+insert into deal_category (deal_id, category_id) values (1, 10);
+insert into deal_category (deal_id, category_id) values (5, 10);
+insert into deal_category (deal_id, category_id) values (5, 9);
+insert into deal_category (deal_id, category_id) values (9, 1);
+insert into deal_category (deal_id, category_id) values (13, 2);
+

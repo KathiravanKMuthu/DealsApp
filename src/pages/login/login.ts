@@ -1,95 +1,181 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
+import { Component } from "@angular/core";
+import { NavController, AlertController, ToastController, IonicPage } from "ionic-angular";
 import { Facebook } from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
+import { AuthService } from "../../providers/auth-service";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { SpinnerProvider } from "../../providers/spinner/spinner";
 
 @IonicPage()
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
+  templateUrl: 'login.html'
 })
 export class LoginPage {
-  params: any = {};
-  responseData : any;
-  userData = {"username": "", "password": "", "email": "", "country": "", "city": ""};
 
-  constructor(public navCtrl: NavController, public fb: Facebook, public googlePlus: GooglePlus, public authService: AuthService) {
+  passwordIcon: any;
+  passwordType: any;
+  showPass: boolean;
+  signInForm: FormGroup;
 
-      //this.fb.browserInit(FB_APP_ID, "v2.8");
+  constructor(public nav: NavController, public fb: Facebook, public formBuilder: FormBuilder,
+              public forgotCtrl: AlertController, public toastCtrl: ToastController, public authService: AuthService, 
+              public spinner : SpinnerProvider) 
+  {
+      this.passwordIcon ="ios-eye-off-outline";
+      this.passwordType = "password";
+      this.showPass = false;
 
-      this.params.data = {
-          "forgotPassword" : "Forgot password?",
-          "labelPassword" : "PASSWORD",
-          "labelUsername" : "USERNAME",
-          "login" : "Login",
-          "logo" : "assets/images/logo/2.png",
-          "password" : "Enter your password",
-          "subtitle" : "Welcome",
-          "title" : "Login to your account",
-          "username" : "Enter your username"
-      }
-
-      this.params.events = {
-          onLogin: function(params) {
-            console.log('onLogin' + JSON.stringify(params));
-            authService.postData(params,'login').then((result) => {
-              this.responseData = result;
-              if(this.responseData.userData){
-                console.log(this.responseData);
-                localStorage.setItem('userData', JSON.stringify(this.responseData));
-                navCtrl.push("TabsPage");
-              }
-              else{ console.log("User already exists"); }
-          }, (err) => {
-              console.log("Unable to signup the user");
-              // Error log
-          });
-        },
-
-          onForgot: function() {
-              console.log('onForgot:');
-          },
-          onRegister: function(params) {
-              navCtrl.push("SignupPage");
-          },
-
-          onFacebook: function(params) {
-            let permissions = new Array<string>();
-            //the permissions your facebook app needs from the user
-            permissions = ["public_profile", "email"];
-
-            fb.login(permissions).then(function(response){
-                let userId = response.authResponse.userID;
-                let params = new Array<string>();
-        
-                //Getting name and gender properties
-                fb.api("/me?fields=name,gender", params).then(function(user) {
-                    user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
-                    //now we have the users info, let's save it in the NativeStorage
-                    console.log(JSON.stringify(user));
-                    localStorage.setItem('user',
-                    JSON.stringify({
-                      name: user.name,
-                      gender: user.gender,
-                      picture: user.picture
-                    }));
-                    /*.then(function(){
-                      this.navCtrl.push("TabsPage");
-                    }, function (error) {
-                      console.log(error);
-                    })*/
-                })
-            });
-          }, // End onFacebook
-
-          onGoogle: function(params){
-            googlePlus.login({}).then(res => {
-                console.log(res);
-            })
-            .catch(err => console.error(err));
-          } // End onGoogle
-      };
+      this.signInForm = formBuilder.group({ 
+          email: [''],
+          password: ['']
+      });
   }
+
+  ionViewWillEnter() {
+    this.authService.getAuthToken().then((data) => {
+        if(data) {
+            this.nav.setRoot("ProfilePage");
+        }
+    });
+  }
+
+  // go to register page
+  register() {
+    this.nav.setRoot("SignupPage");
+  }
+
+  // login and go to home page
+  login() {
+    //console.log(this.signInForm.value);
+    //validate form before calling signing api
+    this.authService.signin(this.signInForm.value.email, this.signInForm.value.password).then((data) => {
+        if(data && data["return_code"] == 1) {
+          const tabs = this.nav.parent;
+          tabs.select(4)
+            .then(() => tabs.getSelected().setRoot("ProfilePage"))
+            .then(() => this.nav.popToRoot());
+        }
+        else {
+          let alert = this.forgotCtrl.create({
+            title: 'Error', subTitle: data["return_message"], buttons: ['OK'], cssClass: "customLoader"
+          });
+          alert.present();  
+        }
+    });
+    //this.nav.setRoot("ProfilePage");
+  }
+
+  showPassword() {
+    this.showPass = !this.showPass;
+
+    if(this.showPass){
+      this.passwordIcon = "ios-eye-outline";
+      this.passwordType = 'text';
+    } else {
+      this.passwordIcon = "ios-eye-off-outline";
+      this.passwordType = 'password';
+    }
+  }
+
+  forgotPass() {
+    let forgot = this.forgotCtrl.create({
+      title: 'Forgot Password?',
+      message: "Enter you email address to send a reset link password.",
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'Email',
+          type: 'email'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Send',
+          handler: data => {
+            console.log('Send clicked');
+            let toast = this.toastCtrl.create({
+              message: 'Reset Email sent successfully',
+              duration: 3000,
+              position: 'top',
+              cssClass: 'dark-trans',
+              closeButtonText: 'OK',
+              showCloseButton: true
+            });
+            toast.present();
+          }
+        }
+      ]
+    });
+    forgot.present();
+  }
+
+  onFacebook() {
+    /*this.fb.getLoginStatus().then(res => {
+      console.log("onFacebook " + res.status);
+      if(res.status === "connect") {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    }).catch(e => console.log("Facebook getLoginStatus failed " + e));*/
+
+      let permissions = new Array<string>();
+      //the permissions your facebook app needs from the user
+      permissions = ["public_profile", "email"];
+      this.fb.login(permissions).then((response) => {
+          if(response.status === "connected") {
+            let userId = response.authResponse.userID;
+            this.getUserDetail(userId);
+          } else {
+              let alert = this.forgotCtrl.create({
+                title: 'Error', subTitle: "Facebook authentication failed !!!", buttons: ['OK'], cssClass: "customLoader"
+              });
+              alert.present();  
+          }
+      }).catch(e => {
+        console.log("Facebook login failed " + e);
+      });
+  }
+
+
+  getUserDetail(fbUserId) {
+      this.spinner.load();
+       //Getting name and gender properties
+      this.fb.api("/" + fbUserId + "?fields=id,email,name,picture", ["public_profile"]).then((user) => {
+          user.image = "https://graph.facebook.com/" + fbUserId + "/picture?type=large";
+
+          this.authService.socialSignin(user, "FACEBOOK").then(data => {
+            if(data && data["return_code"] == 1) {
+              const tabs = this.nav.parent;
+              tabs.select(4)
+                .then(() => tabs.getSelected().setRoot("ProfilePage"))
+                .then(() => this.nav.popToRoot());
+            }
+            else {
+              let alert = this.forgotCtrl.create({
+                title: 'Error', subTitle: data["return_message"], buttons: ['OK'], cssClass: "customLoader"
+              });
+              alert.present();  
+            }    
+          });
+      }).catch(e => {
+        console.log("Facebook getUserDetail " + e);
+      });
+      this.spinner.dismiss();
+  } // End onFacebook
+
+
+  onGoogle(){
+    console.log(" inside onGoogle ");
+    this.authService.googleLogin().then((res) => {
+        console.log(res);
+    });
+  } // End onGoogle
 
 }

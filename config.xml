@@ -1,12 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.elshaddaitech.dealsapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>DealsApp</name>
-    <description>Deals App for you.</description>
-    <author email="kathiravan.muthu@gmail.com" href="http://elshaddai-tech.co.uk/">Elshaddai Tech</author>
+<widget id="com.elshaddaitech.kk.dinjer" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Dinjer Deals</name>
+    <description>Dinjer Deals.</description>
+    <author email="info@elshaddai-tech.co.uk" href="http://elshaddai-tech.co.uk/">Elshaddai Tech</author>
     <content src="index.html" />
     <access origin="*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <allow-navigation href="data:*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
@@ -18,7 +21,7 @@
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="AutoHideSplashScreen" value="false" />
     <platform name="android">
         <allow-intent href="market:*" />
         <config-file parent="/resources" target="./res/values/strings.xml">
@@ -90,11 +93,7 @@
         <variable name="APP_NAME" value="DealDeal" />
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
-    <plugin name="cordova-plugin-googleplus" spec="^5.3.0">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.947940788147-a9jv7hll8mvkboj61m245g3bv27blrl1" />
-    </plugin>
     <plugin name="cordova-plugin-geolocation" spec="~4.0.1" />
-    <allow-navigation href="http://192.168.0.102:8100" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.3.10">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyC-8VBQYTJAUMfPK401zUu2Awj12DU30sU" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyC-8VBQYTJAUMfPK401zUu2Awj12DU30sU" />
@@ -102,13 +101,41 @@
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
-    <allow-navigation href="http://192.168.0.102:8101" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-nativegeocoder" spec="^3.1.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.2.1">
         <variable name="OKHTTP_VERSION" value="3.+" />
     </plugin>
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
-    <allow-navigation href="http://192.168.0.100:8100" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
+        <variable name="REVERSED_CLIENT_ID" value="“com.googleusercontent.apps.947940788147-a9jv7hll8mvkboj61m245g3bv27blrl1”" />
+        <variable name="WEB_APPLICATION_CLIENT_ID" value="1:314941197144:android:a37d81cd4c21fd4f" />
+    </plugin>
+    <allow-navigation href="http://192.168.0.101:8100" />
+    <plugin name="ionic-plugin-deeplinks" spec="^1.0.17">
+        <variable name="URL_SCHEME" value="dinjerdealsapp" />
+        <variable name="DEEPLINK_SCHEME" value="https" />
+        <variable name="DEEPLINK_HOST" value="dinjerdeals.com" />
+        <variable name="ANDROID_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_2_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_3_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_4_PATH_PREFIX" value="/" />
+        <variable name="ANDROID_5_PATH_PREFIX" value="/" />
+        <variable name="DEEPLINK_2_SCHEME" value=" " />
+        <variable name="DEEPLINK_2_HOST" value=" " />
+        <variable name="DEEPLINK_3_SCHEME" value=" " />
+        <variable name="DEEPLINK_3_HOST" value=" " />
+        <variable name="DEEPLINK_4_SCHEME" value=" " />
+        <variable name="DEEPLINK_4_HOST" value=" " />
+        <variable name="DEEPLINK_5_SCHEME" value=" " />
+        <variable name="DEEPLINK_5_HOST" value=" " />
+    </plugin>
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
+    <plugin name="com-badrit-base64" spec="^0.2.0" />
+    <allow-navigation href="http://192.168.0.102:8100" />
+    <plugin name="cordova-plugin-hockeyapp" spec="^5.1.2" />
+    <engine name="ios" spec="4.5.5" />
+    <engine name="android" spec="7.0.0" />
 </widget>

@@ -7,62 +7,111 @@
     "files": {}
   },
   "installed_plugins": {
+    "com-badrit-base64": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     },
     "cordova-plugin-facebook4": {
       "APP_ID": "1789345494452836",
       "APP_NAME": "DealDeal",
       "ANDROID_SDK_VERSION": "4.+",
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     },
     "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
-    },
-    "cordova-plugin-googleplus": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
-    },
-    "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
-    },
-    "cordova-plugin-ionic-webview": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     },
     "cordova-plugin-googlemaps": {
       "API_KEY_FOR_ANDROID": "AIzaSyC-8VBQYTJAUMfPK401zUu2Awj12DU30sU",
       "PLAY_SERVICES_VERSION": "15.0.1",
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     },
-    "cordova-plugin-network-information": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+    "cordova-plugin-googleplus": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     },
-    "cordova-plugin-nativegeocoder": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+    "cordova-plugin-hockeyapp": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     },
     "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-nativegeocoder": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "ionic-plugin-deeplinks": {
+      "URL_SCHEME": "dinjerdealsapp",
+      "DEEPLINK_SCHEME": "https",
+      "DEEPLINK_HOST": "dinjerdeals.com",
+      "ANDROID_PATH_PREFIX": "/",
+      "ANDROID_2_PATH_PREFIX": "/",
+      "ANDROID_3_PATH_PREFIX": "/",
+      "ANDROID_4_PATH_PREFIX": "/",
+      "ANDROID_5_PATH_PREFIX": "/",
+      "DEEPLINK_2_SCHEME": " ",
+      "DEEPLINK_2_HOST": " ",
+      "DEEPLINK_3_SCHEME": " ",
+      "DEEPLINK_3_HOST": " ",
+      "DEEPLINK_4_SCHEME": " ",
+      "DEEPLINK_4_HOST": " ",
+      "DEEPLINK_5_SCHEME": " ",
+      "DEEPLINK_5_HOST": " ",
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "mx.ferreyra.callnumber": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     },
     "uk.co.workingedge.phonegap.plugin.launchnavigator": {
       "OKHTTP_VERSION": "3.+",
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
-    },
-    "mx.ferreyra.callnumber": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     }
   },
   "dependent_plugins": {
+    "com.googlemaps.ios": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
     "cordova-plugin-actionsheet": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     },
     "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.elshaddaitech.dealsapp"
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.elshaddaitech.kk.dinjer"
     }
   }
 }

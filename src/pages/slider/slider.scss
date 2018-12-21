@@ -1,0 +1,87 @@
+page-slider {
+    .SwipedTabs-indicatorSegment
+    {
+        -webkit-transition: 0.3s all;
+        -moz-transition:  0.3s all;
+        -o-transition:  0.3s all;
+        transition:  0.3s all;
+        transform-origin: top 0 left 0;
+        height: 1px;
+	    position: relative;
+	    top: -2px;
+	    background-color: black !important;
+    }
+    .SwipedTabs-tabs ion-segment-button
+    {
+        background-color: map-get($colors , secondary ) !important;
+        color: white !important;
+        border-style: initial;
+        border-width: 2px solid;
+        border-color:map-get($colors , primary ) !important;
+        width: auto !important;
+        display: inline-block;
+        font-size: 80% !important;
+        text-align: left !important;
+        height: 30px !important;
+    }
+     .SwipedTabs-tabs ion-segment-button.SwipedTabs-activeTab
+    {
+        background-color: map-get($colors , primary ) !important;
+        color: white !important;
+        font-weight: bolder !important ;
+        font-size: 60px;
+        border-color:map-get($colors , primary ) !important;
+    }
+
+    ion-segment {
+        background-color: map-get($colors , secondary ) !important;
+        white-space: nowrap;
+        height: 40px !important;
+        padding: 0px 12px;
+    }
+
+    .slide-zoom { 
+        height: 100% !important;
+        overflow-y: scroll !important;
+    }
+
+
+    ion-list {
+        height: 100% !important;
+    }
+
+    .customBtn {
+        background-color: rgb(241, 42, 42) !important;
+        color: rgb(245, 241, 241) !important;
+        text-transform: none !important;
+        padding: 5px;
+        height: 20px !important;
+    }
+    
+    .item-class { 
+        background-color: rgb(99, 76, 76) !important;
+    }
+
+    .item-class.item-block .item-inner {
+        border-bottom: rgb(99, 76, 76) !important;
+    }
+
+    .swiper-slide {
+        overflow-y: scroll;
+        display: block;
+    }
+    
+    .vertical-center {
+            overflow-y:scroll;
+            display: flex;
+            align-items: center;
+            vertical-align: middle;
+            height:100%;
+            background-color:rgb(99, 76, 76) !important;
+
+            ion-item {
+                margin: auto; 
+                background-color:rgb(99, 76, 76) !important;
+            }
+    }
+}

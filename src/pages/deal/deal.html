@@ -2,9 +2,9 @@
     <ion-navbar color="primary">
       <ion-title>{{parentDeal.business_name}}</ion-title>
       <ion-buttons end>
-          <button class="white" ion-button clear (click)="share(parentDeal)"><ion-icon name="share"></ion-icon></button>
-          <button class="white" ion-button clear *ngIf="!isFavorite()" (click)="favorite()"><ion-icon name="ios-heart-outline"></ion-icon></button>
-          <button class="white" ion-button clear *ngIf="isFavorite()" (click)="unFavorite()"><ion-icon name="ios-heart"></ion-icon></button>
+          <button class="white" ion-button clear (click)="share()"><ion-icon name="share"></ion-icon></button>
+          <button class="white" ion-button clear *ngIf="!isFav" (click)="favorite(parentDeal)"><ion-icon name="ios-heart-outline"></ion-icon></button>
+          <button class="white" ion-button clear *ngIf="isFav" (click)="unFavorite(parentDeal)"><ion-icon name="ios-heart"></ion-icon></button>
       </ion-buttons>
   </ion-navbar>
   </ion-header>
@@ -12,11 +12,11 @@
   <ion-content no-padding>
     <ion-list>
       <ion-item no-padding no-margin>
-          <ion-slides autoplay="500" loop="true" speed="1000" pager="true" paginationType="bullets">
+          <ion-slides autoplay="500" loop="true" speed="1000" pager="true" paginationType="bullets" *ngIf="images && images.length">
               <ion-slide *ngFor="let image of images">
                 <img src="{{image}}" />
               </ion-slide>
-            </ion-slides>        
+            </ion-slides>
       </ion-item>
       <ion-item no-padding>
           <h2 class="title">{{parentDeal.title}}</h2>
@@ -26,7 +26,7 @@
       <ion-item no-padding *ngFor="let obj of deals">
           <ion-row>
               <ion-col col-1>
-                  <input type="radio" [(ngModel)]="childDealId" class="radio-square" value="{{obj.id}}" (change)="setChildDeal(obj.id)">
+                  <input type="radio" [(ngModel)]="childDealId" class="radio-square" value="{{obj.deal_id}}" (change)="setChildDeal(obj.deal_id)">
               </ion-col>
               <ion-col col-11>
                 <p class="title">{{obj.title}}</p>
@@ -36,22 +36,22 @@
                 <ion-col col-1>
                 </ion-col>
                 <ion-col col-9>
-                    <p color="primary">{{(obj.end_date| amFromUnix) | amLocal | amDifference: null :'days'}} days left</p>
+                    <p>{{getDateDiff(obj.end_date)}}</p>
                     <p class="details">{{obj.redemption_count}}+ Redeemed</p>
                 </ion-col>
                 <ion-col col-2 *ngIf="obj.deal_amount > 0">
-                    <p color="primary">{{obj.deal_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
-                    <p class="strikethrough">{{obj.actual_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                    <p class="small_title" *ngIf="obj.deal_amount > 0">{{obj.deal_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
+                    <p class="strikethrough" *ngIf="obj.actual_amount > 0">{{obj.actual_amount | currency:'GBP':'symbol':'1.2-2'}}</p>
                 </ion-col>
                 <ion-col col-2 *ngIf="obj.deal_amount <= 0">
-                    <p color="primary">{{obj.percentage}}% off</p>
+                    <p class="small_title">{{obj.percentage}}% off</p>
                 </ion-col>
             </ion-row>
             <ion-row>
                     <ion-col col-1>
                     </ion-col>
                     <ion-col col-9>
-                            <p class="details">{{obj.description}}</p>
+                            <p class="small_title">{{obj.description}}</p>
                         </ion-col>
                     <ion-col col-2>
                         <p class="primary" *ngIf="obj.actual_amount > 0">{{((obj.actual_amount - obj.deal_amount) / obj.actual_amount) | percent}} off</p>
@@ -65,7 +65,7 @@
   <ion-footer>
       <ion-row>
           <ion-col>
-              <button no-margin ion-button full round text-center class="customBtn" (click)="navMerchantPage(parentDeal.business_id)">VISIT US</button>
+              <button no-margin ion-button full round text-center class="customBtn" (click)="navMerchantPage()">VISIT US</button>
           </ion-col>
           <ion-col>
               <button no-margin ion-button full round text-center class="customBtn" (click)="acceptDeal()" *ngIf="!isAcceptedDeal()">ACCEPT</button>

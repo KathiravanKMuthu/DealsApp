@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Facebook } from '@ionic-native/facebook';
+import { SpinnerProvider } from '../../providers/spinner/spinner';
 
 @IonicPage()
 @Component({
@@ -11,57 +14,60 @@ export class SignupPage {
   params: any = {};
   responseData : any;
   userData = {"username": "", "password": "", "email": "", "country": "", "city": ""};
+  passwordIcon: any;
+  passwordType: any;
+  showPass: boolean;
+  signUpForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService) {
-    this.params.data = {
-        "city" : "Your home town",
-        "country" : "Where are you from?",
-        "email" : "Your e-mail address",
-        "lableCity" : "CITY",
-        "lableCountry" : "COUNTRY",
-        "lableEmail" : "E-MAIL",
-        "lablePassword" : "PASSWORD",
-        "lableUsername" : "USERNAME",
-        "logo" : "assets/images/logo/2.png",
-        "password" : "Enter your password",
-        "register" : "Signup",
-        "login" : "Login",
-        "title" : "Signup for new account",
-        "toolbarTitle" : "Register + logo",
-        "username" : "Enter your username"
-    };
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+              public authService: AuthService, public formBuilder: FormBuilder, private fb: Facebook, private spinner: SpinnerProvider) 
+  {
+    this.passwordIcon ="ios-eye-off-outline";
+    this.passwordType = "password";
+    this.showPass = false;
 
-    this.params.events = {
-        onRegister: function(params) {
-            authService.postData(params,'signup').then((result) => {
-              this.responseData = result;
-              if(this.responseData.userData){
-                console.log(this.responseData);
-                localStorage.setItem('userData', JSON.stringify(this.responseData));
-                navCtrl.push("TabsPage");
-              }
-              else{ console.log("User already exists"); }
-            }, (err) => {
-              console.log("Unable to signup the user");
-              // Error log
-            });
-        },
-
-        onLogin: function() {
-          navCtrl.push("LoginPage");
-        }
-    };
+    this.signUpForm = formBuilder.group({ 
+        email: [''],
+        password: [''],
+        phone_number: ['']
+    });
   }
 
-  signup(){
-    this.authService.postData(this.userData,'signup').then((result) => {
-     this.responseData = result;
-     if(this.responseData.userData){
-     console.log(this.responseData);
-     localStorage.setItem('userData', JSON.stringify(this.responseData));
-     this.navCtrl.push("TabsPage");
-     }
-     else{ console.log("User already exists"); }
+  showPassword() {
+    this.showPass = !this.showPass;
+
+    if(this.showPass){
+      this.passwordIcon = "ios-eye-outline";
+      this.passwordType = 'text';
+    } else {
+      this.passwordIcon = "ios-eye-off-outline";
+      this.passwordType = 'password';
+    }
+  }
+
+  ionViewWillEnter() {
+    this.authService.getAuthToken().then((data) => {
+        if(data) {
+            this.navCtrl.setRoot("ProfilePage");
+        }
+    });
+  }
+
+  register(){
+    let value = this.signUpForm.value;
+    this.authService.signup(value.email, value.password, value.phone_number).then((data) => {
+      if(data && data["return_code"] == 1) {
+        const tabs = this.navCtrl.parent;
+        tabs.select(4)
+          .then(() => tabs.getSelected().setRoot("LoginPage"))
+          .then(() => this.navCtrl.popToRoot());
+      }
+      else {
+        let alert = this.alertCtrl.create({
+          title: 'Error', subTitle: 'Unable to signup ' + data["return_message"], buttons: ['OK'], cssClass: "customLoader"
+        });
+        alert.present();  
+      }
    }, (err) => {
      console.log("Unable to signup the user");
      // Error log
@@ -69,8 +75,63 @@ export class SignupPage {
 
  }
 
- login(){
-   //Login page link
-   this.navCtrl.push("LoginPage");
- }
+ onFacebook() {
+    let permissions = new Array<string>();
+    //the permissions your facebook app needs from the user
+    permissions = ["public_profile", "email"];
+    this.fb.login(permissions).then((response) => {
+        if(response.status === "connected") {
+          let userId = response.authResponse.userID;
+          this.getUserDetail(userId);
+        } else {
+            let alert = this.alertCtrl.create({
+              title: 'Error', subTitle: "Facebook authentication failed !!!", buttons: ['OK'], cssClass: "customLoader"
+            });
+            alert.present();  
+        }
+    }).catch(e => {
+      console.log("Facebook login failed " + e);
+    });
+}
+
+
+getUserDetail(fbUserId) {
+    this.spinner.load();
+     //Getting name and gender properties
+    this.fb.api("/" + fbUserId + "?fields=id,email,name,picture", ["public_profile"]).then((user) => {
+      console.log(JSON.stringify(user));
+        user.image = "https://graph.facebook.com/" + fbUserId + "/picture?type=large";
+
+        this.authService.socialSignin(user, "FACEBOOK").then(data => {
+          if(data && data["return_code"] == 1) {
+            const tabs = this.navCtrl.parent;
+            tabs.select(4)
+              .then(() => tabs.getSelected().setRoot("ProfilePage"))
+              .then(() => this.navCtrl.popToRoot());
+          }
+          else {
+            let alert = this.alertCtrl.create({
+              title: 'Error', subTitle: data["return_message"], buttons: ['OK'], cssClass: "customLoader"
+            });
+            alert.present();  
+          }    
+        });
+    }).catch(e => {
+      console.log("Facebook getUserDetail " + e);
+    });
+    this.spinner.dismiss();
+  } // End onFacebook
+
+  login(){
+    //Login page link
+    this.navCtrl.setRoot("LoginPage");
+  }
+
+  onGoogle(){
+    console.log(" inside onGoogle ");
+    this.authService.googleLogin().then((res) => {
+        console.log(res);
+    });
+  } // End onGoogle
+  
 }

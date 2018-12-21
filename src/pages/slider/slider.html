@@ -1,0 +1,44 @@
+<ion-header >
+    <ion-navbar no-border no-padding>
+        <ion-row>
+          <ion-chip col-7 no-padding color="primary">
+            <ion-icon name="ios-search" color="primary" tappable></ion-icon>
+            <ion-label style="color:white !important" tappable>Search...   </ion-label>
+            <ion-icon name="ios-locate-outline" color="primary" tappable (click)="openLocationPage()"></ion-icon>
+            <ion-label style="color:white !important" tappable (click)="openLocationPage()">{{currentCity}}   </ion-label>
+          </ion-chip>
+          <ion-col col-1></ion-col>
+          <ion-chip col-4 no-padding color="primary">
+              <ion-label style="color:white !important" tappable (click)="navCategoryPage()">All Categories    </ion-label>  
+          </ion-chip>
+        </ion-row>
+    </ion-navbar>
+    <ion-toolbar no-border no-padding color="primary">
+      <ion-segment no-padding class="SwipedTabs-tabs"  >
+        <ion-segment-button no-margin  *ngFor='let tab of tabs ; let i = index ' value="IgnoreMe" (click)="selectTab(i)"
+        [ngClass]='{ "SwipedTabs-activeTab" : ( this.SwipedTabsSlider  && ( this.SwipedTabsSlider.getActiveIndex() === i || (  tabs.length -1 === i&& this.SwipedTabsSlider.isEnd()))) }' >
+          {{tab.name}}
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="vertical-center">
+  
+    <!-- here is our dynamic line  "indicator"-->
+    <div id='indicator' class="SwipedTabs-indicatorSegment" ></div>
+  
+    <ion-slides #SwipedTabsSlider  (ionSlideDrag)="animateIndicator($event)"
+                (ionSlideWillChange)="updateIndicatorPosition()"
+                (ionSlideDidChange)="updateIndicatorPosition()"
+                (pan)="updateIndicatorPosition()"
+                [pager]="false"
+          >
+      <ion-slide *ngFor='let tab of tabs'>
+          <ion-nav [root]="tab.page"> </ion-nav>
+      </ion-slide>
+    </ion-slides>
+  
+  
+  </ion-content>
+  

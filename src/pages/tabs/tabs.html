@@ -1,4 +1,4 @@
-<tabs-layout-2
-  [data]="params.data"
-  [events]="params.events">
-</tabs-layout-2>
+<!-- Theme Tabs Footer tab - icons -->
+<ion-tabs #tabs mode="md" tabsHighlight="true" tabsPlacement='bottom'>
+  <ion-tab [tabIcon]="item.icon" [root]="item.page" *ngFor="let item of data;let i = index"></ion-tab>
+</ion-tabs>

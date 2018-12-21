@@ -1,0 +1,67 @@
+{
+  "_from": "cordova-plugin-hockeyapp@latest",
+  "_id": "cordova-plugin-hockeyapp@5.1.2",
+  "_inBundle": false,
+  "_integrity": "sha512-d7lz3eRtpP/xyMFPK6InY9ylGKv8azJqaSEcrfqAnIIyMI0qnDvvVXdoU9/4SbY8bILFmGDvzL6J/wRty16kCg==",
+  "_location": "/cordova-plugin-hockeyapp",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-hockeyapp@latest",
+    "name": "cordova-plugin-hockeyapp",
+    "escapedName": "cordova-plugin-hockeyapp",
+    "rawSpec": "latest",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-hockeyapp/-/cordova-plugin-hockeyapp-5.1.2.tgz",
+  "_shasum": "78e2e3cb7d683853888669913d8a5eef9c8567c7",
+  "_spec": "cordova-plugin-hockeyapp@latest",
+  "_where": "/Users/kkadarkaraimuthu/MyProjects/DealsApp",
+  "author": {
+    "name": "Microsoft",
+    "email": "appcentersdk@microsoft.com"
+  },
+  "bugs": {
+    "url": "https://github.com/bitstadium/HockeySDK-Cordova/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-hockeyapp",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Cordova plugin for HockeyApp",
+  "engines": {
+    "cordovaDependencies": {
+      "2.2.2": {
+        "cordova": ">=4.2.0",
+        "cordova-android": ">=4.0.0",
+        "cordova-ios": ">=3.8.0"
+      }
+    }
+  },
+  "homepage": "https://github.com/bitstadium/HockeySDK-Cordova",
+  "keywords": [
+    "cordova",
+    "hockeyapp",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "Apache-2.0",
+  "name": "cordova-plugin-hockeyapp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitstadium/HockeySDK-Cordova.git"
+  },
+  "version": "5.1.2"
+}

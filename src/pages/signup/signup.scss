@@ -1,3 +1,6 @@
 page-signup {
 
+    .phone-number:before {
+        content: "+";
+    }
 }

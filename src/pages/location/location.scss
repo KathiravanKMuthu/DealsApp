@@ -2,86 +2,34 @@ page-location {
 
     #map {
       width: 100%;
-      height: 50%;
+      height: 70%;
+    }
+    .title {
+      font-size: 1.5rem !important;
+      white-space: pre-line;
     }
 
-    .customBtn {
-      background-color: rgb(241, 42, 42) !important;
-      color: rgb(245, 241, 241) !important;
-      text-transform: none !important;
-      padding: 5px;
-  }
-
-    .centerMarker{
-        position:absolute;
-      /*url of the marker*/
-      background:url(../assets/icon/marker.png) no-repeat;
-      /*center the marker*/
-      top:36%;
-      left:50%;
-      z-index:1;
-      /*fix offset when needed*/
-      margin-left:-17px;
-      margin-top:-20px;
-      /*size of the image*/
-      height:50px;
-      width:50px;
-      cursor:pointer;
-    }
-    .current-location {
-      position: absolute;
-      // background-color: #fff !important;
-      right: 3%;
-      width: 30px;
-      bottom: 40% !important;
-      button {
-        background-color: #fff;
-        height: 2.9rem;
-        width: 2.9rem;
-        img {
-          width: 20px;
-        }
-      }
-      .button-ios.activated {
-        background-color: transparent;
-      }
-    }
-    .address-view {
-      height: 35%;
-    }
     ion-content {
-      background-color: transparent !important;
+     // background-color: transparent !important;
+      background-color:rgb(99, 76, 76) !important;
     }
-    .go-back-button, .search-button {
-      background-color: transparent !important;
-      box-shadow: none;
-      .activated {
-        background-color: transparent !important;
-      }
-    }
-    .search-button {
-      ion-icon {
-        font-size: 2.7rem !important;
-      }
-    }
-    .back-btn, .search-btn {
-      position: absolute;
-      ion-icon {
-        color: #000;
-      }
-    }
-    .search-btn {
-      left: 85%;
-    }
+
     .search-box {
       position: absolute;
       top: 2%;
       z-index: 999;
-      width:50%;
+      border: 0 !important;
+      box-shadow: none !important;
     }
-    ion-textarea {
-      font-size: 14px;
-    }
+    .range-md .range-knob-handle .range-pin {
+      transform: translate3d(0, 0, 0) scale(1); }
+    
+    .range-md:not(.range-has-pin) .range-knob-handle .range-knob {
+      transform: scale(1); }
+    
+    .range-ios .range-knob-handle .range-pin {
+      transform: translate3d(0, 0, 0) scale(1); }
+
     .ios, .md {
       home-page {
         .scroll {
